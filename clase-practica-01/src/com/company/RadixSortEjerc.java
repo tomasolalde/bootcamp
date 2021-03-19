@@ -6,14 +6,17 @@ import java.util.HashMap;
 
 public class RadixSortEjerc {
 
-    public static void radixSort(int[] arr) {
+    public static void radixSort(Object[] arr) {
         StringUtil stringUtil = new StringUtil();
-        String[] normalizedArray = stringUtil.lNormalize(stringUtil.toStringArray(arr), '0');
-
+        char x = '.';
+        if(arr instanceof Integer[]) x = '0';
+        if(arr instanceof String[]) x = 'a';
+        String[] normalizedArray = stringUtil.lNormalize(stringUtil.toStringArray(arr), x);
+        HashMap<String, ArrayList<String>> structure = stringUtil.createStructure(normalizedArray);
         int maxNumberLength = normalizedArray[0].length();
 
         for (int j = maxNumberLength - 1; j >= 0; j--) {
-            HashMap<String, ArrayList<String>> structure = stringUtil.createStructure(normalizedArray);
+            stringUtil.clearStructure(structure);
             for (int i = 0; i < normalizedArray.length; i++) {
                 Character c = normalizedArray[i].charAt(j);
                 ArrayList<String> arrayList = structure.get(Character.toString(c));
@@ -26,7 +29,9 @@ public class RadixSortEjerc {
     }
 
     public static void main(String[] args) {
-        int arr[] = {1623, 898, 13, 906, 235, 1231,23, 1532, 32, 2511, 8, 7, 0};
+        //Integer arr[] = {1623, 5, 898, 13, 906, 235, 1231, 1, 2, 3, 4, 23, 1532, 32, 2511, 8, 7, 0};
+        String[] arr = {"asd", "ddd", "102931''¡3", "a", "das", "okp--", "aaa", "qwerty", "jeje", "jojo"};
+
         radixSort(arr);
     }
 

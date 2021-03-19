@@ -40,10 +40,10 @@ public class StringUtil {
      * @param arr
      * @return
      */
-    public static String[] toStringArray(int arr[]) {
+    public static String[] toStringArray(Object[] arr) {
         String[] arrayString = new String[arr.length];
         for (int i = 0; i < arr.length; i++)
-            arrayString[i] = Integer.toString(arr[i]);
+            arrayString[i] = arr[i].toString();
         return arrayString;
     }
 
@@ -123,6 +123,16 @@ public class StringUtil {
             structure.put(c.toString(), new ArrayList<String>());
         }
         return structure;
+    }
+
+    /***
+     * Elimina los elementos dentro de cada arrayList que contenga la estructura
+     * @param structure
+     */
+    public static void clearStructure(HashMap<String, ArrayList<String>> structure) {
+        for (Map.Entry<String, ArrayList<String>> entry : structure.entrySet()) {
+            entry.getValue().clear();
+        }
     }
 
     /***
