@@ -26,9 +26,7 @@ public class RadixSortEjerc {
     }
 
     public static void main(String[] args) {
-
         int arr[] = {1623, 898, 13, 906, 235, 1231,23, 1532, 32, 2511, 8, 7, 0};
-
         radixSort(arr);
     }
 

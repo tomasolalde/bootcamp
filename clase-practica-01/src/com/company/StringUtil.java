@@ -5,7 +5,6 @@ import java.util.*;
 public class StringUtil {
     /**
      * Retorna una cadena compuesta por n caractedes c
-     *
      * @param c caracteres
      * @param n longitud
      * @return
@@ -66,12 +65,12 @@ public class StringUtil {
      * @param arr
      * @return
      */
-    public static int maxLength(String arr[]) {
-        int max = 0;
+    public static String maxLength(String arr[]) {
+        String max = "";
         for (String value : arr) {
-            if (Integer.parseInt(value) > max) max = Integer.parseInt(value);
+            if (value.length() > max.length()) max = value;
         }
-        return Integer.toString(max).length();
+        return max;
     }
 
     /***
@@ -84,9 +83,9 @@ public class StringUtil {
      */
     public static String[] lNormalize(String arr[], char c) {
         String[] newArray = new String[arr.length];
-        int maxLength = maxLength(arr);
+        String max = maxLength(arr);
         for (int i = 0; i < arr.length; i++) {
-            newArray[i] = lpad(arr[i], maxLength, c);
+            newArray[i] = lpad(arr[i], max.length(), c);
         }
         return newArray;
     }
@@ -139,7 +138,6 @@ public class StringUtil {
                 arrayList.add(array.get(i));
             }
         }
-
         String[] strArray = new String[arrayList.size()];
         strArray = arrayList.toArray(strArray);
         return strArray;
