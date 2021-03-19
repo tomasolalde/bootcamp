@@ -96,6 +96,7 @@ public class StringUtil {
     /**
      * Retorna todos los caractedes distintos que existan dentro
      * de todos los numeros que contiene el arr
+     *
      * @param arr array de strings
      * @return
      */
@@ -147,12 +148,43 @@ public class StringUtil {
         ArrayList<String> arrayList = new ArrayList<String>();
         for (Map.Entry<String, ArrayList<String>> entry : structure.entrySet()) {
             ArrayList<String> array = entry.getValue();
-            for (int i = 0; i < array.size(); i++) {
-                arrayList.add(array.get(i));
-            }
+            arrayList.addAll(array);
         }
         String[] strArray = new String[arrayList.size()];
         strArray = arrayList.toArray(strArray);
         return strArray;
     }
+
+    public static String rpad(String s, char c, int n) {
+        if (s.length() < n) {
+            int digitsToAdd = n - s.length();
+            s = s + replicate(c, digitsToAdd);
+        }
+        return s;
+    }
+
+    public static String ltrim(String s) {
+        return s.replaceAll("^\\s+", "");
+    }
+
+    public static String rtrim(String s) {
+        return s.replaceAll("\\s+$", "");
+    }
+
+    public static String trim(String s) {
+        String rtrim = rtrim(s);
+        return ltrim(rtrim);
+    }
+
+    public static int indexOfN(String s, char c, int n) {
+        int count = 0;
+        int i = 0;
+        while (i < s.length()) {
+            if(s.charAt(i) == c) count++;
+            if(n == count) return i;
+            i++;
+        }
+        return -1;
+    }
+
 }
