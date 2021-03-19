@@ -35,9 +35,11 @@ public class StringUtil {
         return s;
     }
 
-    /*
-    Retorna un String[] conteniendo los elementos de arr
-    representados como cadenas de caracteres
+    /***
+     * Transforma un array de int a un array de
+     * Strings
+     * @param arr
+     * @return
      */
     public static String[] toStringArray(int arr[]) {
         String[] arrayString = new String[arr.length];
@@ -46,9 +48,11 @@ public class StringUtil {
         return arrayString;
     }
 
-    /*
-    Retorna un String[] conteniendo los elementos de arr
-    representados como cadenas de caracteres
+    /***
+     * Transforma un array de enteros a un array de
+     * int
+     * @param arr
+     * @return
      */
     public static int[] toIntArray(String arr[]) {
         int[] arrayInt = new int[arr.length];
@@ -57,9 +61,10 @@ public class StringUtil {
         return arrayInt;
     }
 
-    /*
-    Retorna la longitud del elemento con mayor cantidad
-    de caracteres del array arr
+    /***
+     * Retorna la longitud del mayor elemento dentro del array
+     * @param arr
+     * @return
      */
     public static int maxLength(String arr[]) {
         int max = 0;
@@ -69,9 +74,13 @@ public class StringUtil {
         return Integer.toString(max).length();
     }
 
-    /*
-    Completa los elemento del arr agregando caracteres c
-    a la izquierda, dejando a todos con la longitud del mayor
+    /***
+     * Normaliza todas las cadenas dentro del array para que
+     * todas tengan la misma cantidad de caracteres, completando
+     * con el caracter c
+     * @param arr
+     * @param c
+     * @return
      */
     public static String[] lNormalize(String arr[], char c) {
         String[] newArray = new String[arr.length];
