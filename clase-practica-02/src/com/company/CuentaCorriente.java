@@ -6,6 +6,12 @@ public class CuentaCorriente {
     private String propietario;
     private String CBU;
 
+    public CuentaCorriente(double saldo, String propietario, String CBU) {
+        this.saldo = saldo;
+        this.propietario = propietario;
+        this.CBU = CBU;
+    }
+
     public String getPropietario() {
         return propietario;
     }
@@ -55,10 +61,9 @@ public class CuentaCorriente {
 
     @Override
     public String toString() {
-        return "CuentaCorriente{" +
+        return "CuentaCorriente: " +
                 "saldo=" + saldo +
                 ", propietario='" + propietario + '\'' +
-                ", CBU='" + CBU + '\'' +
-                '}';
+                ", CBU='" + CBU + '\'';
     }
 }

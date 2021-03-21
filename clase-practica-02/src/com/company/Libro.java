@@ -5,7 +5,7 @@ public class Libro {
     private String titulo;
     private String autor;
     private String isbn;
-    private Boolean disponible;
+    private Boolean disponible = true;
 
     public Libro(String titulo, String autor, String isbn) {
         this.titulo = titulo;
@@ -58,10 +58,9 @@ public class Libro {
 
     @Override
     public String toString() {
-        return "Libro{" +
+        return "Libro: " +
                 "titulo='" + titulo + '\'' +
                 ", autor='" + autor + '\'' +
-                ", isbn='" + isbn + '\'' +
-                '}';
+                ", isbn='" + isbn + '\'';
     }
 }

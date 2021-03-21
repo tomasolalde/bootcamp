@@ -1,33 +1,25 @@
 package com.company;
 
-import java.util.GregorianCalendar;
+import java.util.*;
 
 public class Fecha {
+    private final GregorianCalendar calendar = new GregorianCalendar();
+    private Date fecha;
 
-    private GregorianCalendar calendar = new GregorianCalendar();
-
-    public Fecha(int dia, int mes, int ano) {
-        new Fecha(ano + "/" + mes + "/" + dia);
+    public Fecha() {
+        Date date = new Date();
+        System.out.println(date);
+        this.calendar.setTime(date);
     }
 
-    public Fecha(String fecha) {
-        String[] values = fecha.split("/");
-
-        System.out.println(values[0] + "/" + values[1] + "/" + values[2]);
-
-        if (values.length != 3)
-            System.out.println("La fecha no es valida");
-        else
-            calendar.set(Integer.parseInt(values[2]), Integer.parseInt(values[1]) - 1, Integer.parseInt(values[0]), 0, 0, 0);
+    public String getFecha() {
+        int day = this.calendar.get(Calendar.DATE);
+        int month = this.calendar.get(Calendar.MONTH);
+        int year = this.calendar.get(Calendar.YEAR);
+        return day + "/" + (month > 10 ? month : "0" + month)  + "/" + year + "/";
     }
 
-    public static boolean esValida(String fecha) {
-        String[] values = fecha.split("/");
-        return values.length == 3;
-    }
-
-    @Override
-    public String toString() {
-        return "Fecha: " + calendar.getTime();
+    public void setFecha(Date fecha) {
+        this.calendar.setTime(fecha);
     }
 }
