@@ -35,8 +35,10 @@ public class Main {
                     break;
                 case 4:
                     Contador.increment();
-                    Fecha fecha = new Fecha();
-                    System.out.println(fecha.getFecha());
+                    Fecha fechahHoy = new Fecha();
+                    System.out.println("Fecha hoy: " + fechahHoy.getFecha());
+                    fechahHoy.agregarDias(2);
+                    System.out.println(fechahHoy.getFecha());
                     break;
                 default:
                     runProgram = false;
@@ -44,7 +46,5 @@ public class Main {
             }
             System.out.println("\n* FIN *");
         }
-
-
     }
 }
