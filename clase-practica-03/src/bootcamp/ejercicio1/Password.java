@@ -1,4 +1,4 @@
-package bootcamp;
+package bootcamp.ejercicio1;
 
 import java.util.regex.Pattern;
 

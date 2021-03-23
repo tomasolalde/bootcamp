@@ -1,7 +1,6 @@
-package bootcamp;
+package bootcamp.ejercicio1;
 
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Main {
 

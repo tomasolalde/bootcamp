@@ -1,5 +1,6 @@
-package bootcamp;
+package bootcamp.ejercicio1;
 
+import java.util.InvalidPropertiesFormatException;
 import java.util.regex.Pattern;
 
 public abstract class AbstractPassword {
@@ -7,10 +8,10 @@ public abstract class AbstractPassword {
     private String password;
     protected Pattern pattern;
 
-    public void setValue(String password) throws IllegalArgumentException {
+    public void setValue(String password) throws InvalidPropertiesFormatException {
         boolean result = pattern.matcher(password).matches();
         if (!result) {
-            throw new IllegalArgumentException(getMessage());
+            throw new InvalidPropertiesFormatException(getMessage());
         }
         this.password = password;
     }

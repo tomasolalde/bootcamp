@@ -1,4 +1,4 @@
-package bootcamp;
+package bootcamp.ejercicio1;
 
 public class PasswordIntermedia extends AbstractPassword {
 
