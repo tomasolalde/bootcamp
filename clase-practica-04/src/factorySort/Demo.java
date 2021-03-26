@@ -15,10 +15,17 @@ public class Demo {
 
         Sorter s = (Sorter) MyFactory.getInstance("sorter");
 
-        s.sort(iArr, c1);
-        s.sort(sArr, c2);
+        Integer[] arrGrandote = new Integer[10000];
+        for (int x=0; x < arrGrandote.length; x++) {
+            arrGrandote[x] = (int) (Math.random()*1000)+1;
+        }
+
+        Time time = new Time();
+        time.start();
+        s.sort(arrGrandote, c1);
         System.out.println("\n *** " + s.getClass().getName() + " *** \n");
         System.out.println(Arrays.toString(iArr));
-        System.out.println(Arrays.toString(sArr));
+        time.stop();
+        System.out.println("Timepo transcurrido: " + time.elapsedTime() + " milisegundos.");
     }
 }
