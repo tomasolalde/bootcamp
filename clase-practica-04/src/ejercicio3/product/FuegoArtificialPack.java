@@ -4,33 +4,29 @@ import java.util.ArrayList;
 
 public class FuegoArtificialPack implements FuegoArtificial {
 
-    private ArrayList<FuegoArtificial> individuales;
-    private ArrayList<FuegoArtificialPack> packs;
+    private ArrayList<FuegoArtificial> fuegosArtificiales = new ArrayList<FuegoArtificial>();
 
     @Override
     public void explotar() {
-        for(FuegoArtificial fa : individuales) {
+        for(FuegoArtificial fa : fuegosArtificiales) {
             fa.explotar();
         }
-        for (FuegoArtificialPack fap : packs) {
-            fap.explotar();
-        }
     }
 
-    void agregarFuegoArtificialPUM() {
-        individuales.add(new FuegoArtificialPUM());
+    public void agregarFuegoArtificialPUM() {
+        fuegosArtificiales.add(new FuegoArtificialPUM());
     }
 
-    void agregarFuegoArtificialPAM() {
-        individuales.add(new FuegoArtificialPAM());
+    public void agregarFuegoArtificialPAM() {
+        fuegosArtificiales.add(new FuegoArtificialPAM());
     }
 
-    void agregarFuegoArtificialPUF() {
-        individuales.add(new FuegoArtificialPUF());
+    public void agregarFuegoArtificialPUF() {
+        fuegosArtificiales.add(new FuegoArtificialPUF());
     }
 
-    void agregarPack(FuegoArtificialPack pack) {
-        packs.add(pack);
+    public void agregarPack(FuegoArtificialPack pack) {
+        fuegosArtificiales.add(pack);
     }
 
 }
