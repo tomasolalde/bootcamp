@@ -1,11 +1,8 @@
 package com.calorie.calculator.repositories;
 
 import com.calorie.calculator.dtos.FoodDTO;
-import com.calorie.calculator.dtos.PlateTotalCaloriesDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 

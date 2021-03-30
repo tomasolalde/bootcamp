@@ -7,15 +7,15 @@ import java.util.ArrayList;
 
 @Data
 @AllArgsConstructor
-public class PlateTotalCaloriesDTO {
+public class PlateTotalCaloriesResponseDTO {
     public String name;
     public double totalCalories;
     public ArrayList<FoodDTO> listOfingredients = new ArrayList<>();
     public FoodDTO maxIngredient;
 
-    public PlateTotalCaloriesDTO() {}
+    public PlateTotalCaloriesResponseDTO() {}
 
-    public PlateTotalCaloriesDTO(String name) {
+    public PlateTotalCaloriesResponseDTO(String name) {
         this.name = name;
     }
 

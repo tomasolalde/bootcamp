@@ -3,12 +3,12 @@ package com.calorie.calculator.services;
 
 import com.calorie.calculator.dtos.FoodDTO;
 import com.calorie.calculator.dtos.PlateOfFoodDTO;
-import com.calorie.calculator.dtos.PlateTotalCaloriesDTO;
+import com.calorie.calculator.dtos.PlateTotalCaloriesResponseDTO;
 
 import java.util.ArrayList;
 
 public interface CalorieCalculatorService {
     ArrayList<FoodDTO> getFood();
-    PlateTotalCaloriesDTO calculateTotalCalories(PlateOfFoodDTO plateOfFoodDTO);
-    ArrayList<PlateTotalCaloriesDTO> calculateTotalCaloriesForManyPlates(ArrayList<PlateOfFoodDTO> listOfPlates);
+    PlateTotalCaloriesResponseDTO calculateTotalCalories(PlateOfFoodDTO plateOfFoodDTO);
+    ArrayList<PlateTotalCaloriesResponseDTO> calculateTotalCaloriesForManyPlates(ArrayList<PlateOfFoodDTO> listOfPlates);
 }

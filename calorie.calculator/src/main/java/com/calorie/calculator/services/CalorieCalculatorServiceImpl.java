@@ -3,7 +3,7 @@ package com.calorie.calculator.services;
 import com.calorie.calculator.dtos.FoodDTO;
 import com.calorie.calculator.dtos.IngredientDTO;
 import com.calorie.calculator.dtos.PlateOfFoodDTO;
-import com.calorie.calculator.dtos.PlateTotalCaloriesDTO;
+import com.calorie.calculator.dtos.PlateTotalCaloriesResponseDTO;
 import com.calorie.calculator.repositories.CalorieCalculatorRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +25,9 @@ public class CalorieCalculatorServiceImpl implements CalorieCalculatorService {
     }
 
     @Override
-    public PlateTotalCaloriesDTO calculateTotalCalories(PlateOfFoodDTO plateOfFoodDTO) {
-        PlateTotalCaloriesDTO plateTotalCaloriesDTO = new PlateTotalCaloriesDTO(plateOfFoodDTO.name);
+    public PlateTotalCaloriesResponseDTO calculateTotalCalories(PlateOfFoodDTO plateOfFoodDTO) {
+        PlateTotalCaloriesResponseDTO plateTotalCaloriesDTO = new PlateTotalCaloriesResponseDTO(plateOfFoodDTO.name);
         HashMap<String, Double> foodHashMap = foodListToHashMap(this.repository.getFood());
-
         for (IngredientDTO ingredient : plateOfFoodDTO.ingredients) {
             Double caloriesOfIngredient = foodHashMap.get(ingredient.name);
             if (caloriesOfIngredient != null) {
@@ -36,14 +35,13 @@ public class CalorieCalculatorServiceImpl implements CalorieCalculatorService {
                 plateTotalCaloriesDTO.totalCalories += caloriesOfIngredient * ingredient.weight;
             }
         }
-
         plateTotalCaloriesDTO.maxIngredient = getMaxIngredient(plateTotalCaloriesDTO.listOfingredients);
         return plateTotalCaloriesDTO;
     }
 
     @Override
-    public ArrayList<PlateTotalCaloriesDTO> calculateTotalCaloriesForManyPlates(ArrayList<PlateOfFoodDTO> listOfPlates) {
-        ArrayList<PlateTotalCaloriesDTO> processedPlates = new ArrayList<>();
+    public ArrayList<PlateTotalCaloriesResponseDTO> calculateTotalCaloriesForManyPlates(ArrayList<PlateOfFoodDTO> listOfPlates) {
+        ArrayList<PlateTotalCaloriesResponseDTO> processedPlates = new ArrayList<>();
         for(PlateOfFoodDTO plate : listOfPlates) {
             processedPlates.add(calculateTotalCalories(plate));
         }
