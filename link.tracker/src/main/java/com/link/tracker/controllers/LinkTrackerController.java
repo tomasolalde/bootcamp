@@ -34,6 +34,18 @@ public class LinkTrackerController {
         return new ResponseEntity<>(this.service.getLinkById(id), HttpStatus.OK);
     }
 
+    @PutMapping(value = "/disable/{id}")
+    public HttpStatus disableLink(@PathVariable Integer id) throws ApiException {
+        this.service.enable(false, id);
+        return HttpStatus.OK;
+    }
+
+    @PutMapping(value = "/enable/{id}")
+    public HttpStatus enableLink(@PathVariable Integer id) throws ApiException {
+        this.service.enable(true, id);
+        return HttpStatus.OK;
+    }
+
     @GetMapping(value = "/redirect/{id}")
     public RedirectView redirect(@PathVariable Integer id, @RequestParam String password) throws ApiException {
         if(password.equals(this.service.getLinkById(id).getPassword())) {
@@ -41,7 +53,7 @@ public class LinkTrackerController {
             return new RedirectView(this.service.getLinkById(id).getUrl());
         }
         else {
-            throw new ApiException(HttpStatus.FORBIDDEN.name(), "Contraseña incorrecta.", HttpStatus.FORBIDDEN.value());
+            throw new ApiException(HttpStatus.FORBIDDEN, "Contraseña incorrecta.");
         }
     }
 

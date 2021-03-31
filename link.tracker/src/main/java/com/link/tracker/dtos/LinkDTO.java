@@ -13,6 +13,7 @@ public class LinkDTO {
     private String url;
     private int metrics;
     private String password;
+    private boolean enable;
 
     LinkDTO() {
     }

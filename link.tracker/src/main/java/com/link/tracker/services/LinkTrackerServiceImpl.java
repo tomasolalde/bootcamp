@@ -19,6 +19,11 @@ public class LinkTrackerServiceImpl implements LinkTrackerService {
     private LinkTrackerRepository repository;
 
     @Override
+    public void enable(boolean enable, int id) throws ApiException {
+        this.repository.enable(enable,id);
+    }
+
+    @Override
     public LinkDTO getLinkById(int id) throws ApiException{
         return this.repository.getLinkById(id);
     }
@@ -44,7 +49,7 @@ public class LinkTrackerServiceImpl implements LinkTrackerService {
         Pattern patt = Pattern.compile(pattern);
         Matcher matcher = patt.matcher(url);
         if(!matcher.matches())  {
-            throw new ApiException(HttpStatus.BAD_REQUEST.name(), "URL Invalida", HttpStatus.BAD_REQUEST.value());
+            throw new ApiException(HttpStatus.BAD_REQUEST, "URL Invalida");
         }
     }
 }

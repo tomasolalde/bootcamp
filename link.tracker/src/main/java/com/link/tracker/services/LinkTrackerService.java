@@ -6,7 +6,8 @@ import com.link.tracker.exceptions.ApiException;
 
 import java.util.ArrayList;
 
-public interface LinkTrackerService {
+public interface LinkTrackerService  {
+    void enable(boolean enable, int id) throws ApiException;
     LinkDTO getLinkById(int id) throws ApiException;
     int create(CreateLinkDTO link) throws ApiException;
     ArrayList<LinkDTO> getAll();

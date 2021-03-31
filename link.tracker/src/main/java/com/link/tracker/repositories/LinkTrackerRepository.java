@@ -11,4 +11,5 @@ public interface LinkTrackerRepository {
     int create(CreateLinkDTO link) throws ApiException;
     ArrayList<LinkDTO> getAll();
     void incrementMetric(int id) throws ApiException;
+    void enable(boolean enable, int id) throws ApiException;
 }

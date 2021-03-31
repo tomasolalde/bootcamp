@@ -1,5 +1,7 @@
 package com.link.tracker.exceptions;
 
+import org.springframework.http.HttpStatus;
+
 public class ApiException extends Exception {
 
 	private final String code;
@@ -11,6 +13,13 @@ public class ApiException extends Exception {
 		this.code = code;
 		this.description = description;
 		this.statusCode = statusCode;
+	}
+
+	public ApiException(HttpStatus httpStatus, String description) {
+		super(description);
+		this.code = httpStatus.name();
+		this.description = description;
+		this.statusCode = httpStatus.value();
 	}
 
 	public String getCode() {
