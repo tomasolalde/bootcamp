@@ -35,4 +35,9 @@ public class StartWarsServiceImpl implements StartWarsService {
         return this.repository.getCharacters();
     }
 
+    @Override
+    public String createCharacter(CharacterDTO character) {
+        return this.repository.save(character);
+    }
+
 }
