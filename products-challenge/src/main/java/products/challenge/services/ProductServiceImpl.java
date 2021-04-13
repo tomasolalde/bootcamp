@@ -21,33 +21,47 @@ public class ProductServiceImpl implements ProductService {
         this.repository = repository;
     }
 
+    /**
+     * Obtiene todos los productos por distintos filtros
+     * @param filters
+     * @return
+     */
     @Override
     public List<ProductDTO> getAllByFilters(ProductFiltersDTO filters) {
+        // Valido el numero de filtros
         filters.validateNumberOfFilters();
+        // Valido la consistencia de los filtros
         validateFilters(filters);
         List<ProductDTO> products = this.repository.getProducts();
+
+        // Aplico los filtros
         products = products.stream()
                 .filter(product -> {
                     boolean matches = true;
+                    // Filtro por nombre
                     if (filters.getName() != null) {
                         matches = product.getName().equals(filters.getName());
                     }
+                    // Filtro por marca
                     if (filters.getBrand() != null) {
                         matches = matches && product.getBrand().equals(filters.getBrand());
                     }
+                    // Filtro por categoria
                     if (filters.getCategory() != null) {
                         matches = matches && product.getCategory().equals(filters.getCategory());
                     }
+                    // Filtro por envio gratis
                     if (filters.getFreeShipping() != null) {
                         matches = matches && product.freeShipping.equals(filters.getFreeShipping());
                     }
+                    // Filtro por prestigio
                     if (filters.getPrestige() != null) {
                         matches = matches && product.getPrestige().equals(filters.getPrestige());
                     }
                     return matches;
                 }).collect(Collectors.toList());
 
-        // order
+        // Filtro por orden
         if (filters.getOrder() != null) {
             int opt = filters.getOrder();
             switch (opt) {
@@ -71,7 +85,14 @@ public class ProductServiceImpl implements ProductService {
         return products;
     }
 
-    @Override
+
+    /**
+     * Valida los distintos parametros.
+     * Compara los parametros enviados con los parametros almacenados en la base de datos a fin de
+     * no permitir que se ingresen datos incorrectos o inconsistentes
+     * @param filtes
+     * @throws ApiException
+     */
     public void validateFilters(Filtes filtes) throws ApiException {
         HashMap<String, Object> listOfFilters = filtes.getValues();
         for (Map.Entry<String, Object> entry : listOfFilters.entrySet()) {
@@ -107,7 +128,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO getProductById(Integer id) {
-        return this.repository.getProductById(id);
+        return repository.getProductById(id);
     }
 
 

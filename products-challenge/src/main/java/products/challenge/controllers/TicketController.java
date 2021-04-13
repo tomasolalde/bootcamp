@@ -19,6 +19,11 @@ public class TicketController {
         this.service = ticketService;
     }
 
+    /**
+     * Crea una orden de compras
+     * @param request orden de compras a crear
+     * @return orden de compras con el total del carrito
+     */
     @PostMapping(value = "purchase-request")
     public ResponseEntity<ResponsePurchaseDTO> createPurchaseRequest(@RequestBody RequestPurchaseDTO request) {
         ResponsePurchaseDTO response = new ResponsePurchaseDTO();
@@ -27,11 +32,20 @@ public class TicketController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    /**
+     * Retorna un ticket filtrado por id
+     * @param id id del ticket a filtrar
+     * @return ticket
+     */
     @GetMapping(value = "ticket/{id}")
     public ResponseEntity<TicketDTO> getTicketById(@PathVariable Integer id) {
         return new ResponseEntity<>(this.service.getTicketById(id), HttpStatus.CREATED);
     }
 
+    /**
+     * Retorna el historial de tickets creados
+     * @return tickets
+     */
     @GetMapping(value = "ticket")
     public ResponseEntity<List<TicketDTO>> getAll() {
         return new ResponseEntity<>(this.service.getAll(), HttpStatus.OK);

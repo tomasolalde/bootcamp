@@ -22,7 +22,7 @@ public class StartWarsRepositoryImpl implements StartWarsRepository {
     @Override
     public String save(CharacterDTO character) {
         String fileName = "starwars.json";
-        Path JSONFilesDirectory = Paths.get("src", "main", "resources", "JSON");
+        Path JSONFilesDirectory = Paths.get("src", "main", "resources", "starwars.json");
         String absolutePath = JSONFilesDirectory.toFile().getAbsolutePath();
         ArrayList<CharacterDTO> characters = loadArraylistDatabase(fileName);
         characters.add(character);

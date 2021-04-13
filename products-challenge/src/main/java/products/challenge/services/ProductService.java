@@ -9,8 +9,5 @@ import java.util.List;
 
 public interface ProductService {
     List<ProductDTO> getAllByFilters(ProductFiltersDTO filters) throws ApiException;
-
-    void validateFilters(Filtes filtes) throws ApiException;
-
     ProductDTO getProductById(Integer id);
 }

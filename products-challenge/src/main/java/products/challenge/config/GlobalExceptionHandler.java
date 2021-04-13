@@ -2,8 +2,11 @@ package products.challenge.config;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import products.challenge.exceptions.ApiError;
 import products.challenge.exceptions.ApiException;
@@ -12,6 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Clase global encargada de manejar las excepciones de la API
+ * Tiene el fin de capturar una gran parte de las excepciones y retornar un modelo conocido,
+ * manteniendo la consistencia e las respuetas
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -44,6 +52,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = {Exception.class})
     protected ResponseEntity<ApiError> handleUnknownException(Exception e) {
         ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR.name(), "Error interno en el servidor", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return ResponseEntity.status(apiError.getStatus()).body(apiError);
+    }
+
+    @ExceptionHandler({ MethodArgumentNotValidException.class })
+    public ResponseEntity<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST.name(), e.getFieldError().getDefaultMessage(), HttpStatus.BAD_REQUEST.value());
         return ResponseEntity.status(apiError.getStatus()).body(apiError);
     }
 }

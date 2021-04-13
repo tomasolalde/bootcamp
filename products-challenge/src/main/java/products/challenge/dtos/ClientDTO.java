@@ -4,16 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDTO {
+public class ClientDTO {
     public Integer id;
+    @NotBlank(message = "EL nombre es requerido")
     public String name;
-    public String category;
-    public String brand;
-    public Double price;
-    public Integer quantity;
-    public Boolean freeShipping;
-    public Integer prestige;
+    @NotBlank(message = "La provincia es requerida")
+    public String state;
 }

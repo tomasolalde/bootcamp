@@ -1,5 +1,8 @@
 package products.challenge.exceptions;
 
+/**
+ * Modelo de respuesta de un error
+ */
 public class ApiError {
 	private String error;
 	private String message;

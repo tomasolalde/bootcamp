@@ -2,6 +2,7 @@ package products.challenge.dtos.filters;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import products.challenge.exceptions.ApiException;
 
@@ -35,9 +36,8 @@ public class ProductFiltersDTO implements Filtes {
         return listOfValues;
     }
 
-    @Override
     public void validateNumberOfFilters() throws ApiException {
-        int parameters = 0;
+        Integer parameters = 0;
         HashMap<String, Object> listOfValues = getValues();
         for (Map.Entry<String, Object> entry : listOfValues.entrySet()) {
             if (entry.getValue() != null) {

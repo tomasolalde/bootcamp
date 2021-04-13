@@ -77,7 +77,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public ProductDTO getProductById(Integer id) {
-        for (ProductDTO p : getProducts()) {
+        for (ProductDTO p : this.getProducts()) {
             if (p.getId().equals(id)) return p;
         }
         throw new ApiException(HttpStatus.NOT_FOUND, "No se encontro el producto con id " + id);
@@ -94,10 +94,14 @@ public class ProductRepositoryImpl implements ProductRepository {
         throw new ApiException(HttpStatus.NOT_FOUND, "No se encontro el producto con id " + id);
     }
 
+    /**
+     * Retorna un archivo dado el nombre
+     * @param fileName nombre del archivo
+     */
     public File loadFile(String fileName) {
-        File file = null;
+        File file = new File("");
         try {
-            file = ResourceUtils.getFile("classpath:" + fileName);
+            file = ResourceUtils.getFile(file.getAbsolutePath()+ "/src/main/resources/" + fileName);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
