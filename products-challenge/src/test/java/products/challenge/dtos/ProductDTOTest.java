@@ -49,8 +49,8 @@ public class ProductDTOTest {
     public static ArrayList<ProductDTO> getProductsAlphabeticallyDesordered() {
         ArrayList<ProductDTO> list = new ArrayList<>();
         list.add(new ProductDTO(1, "Desmalezadora", "Herramientas", "Makita", 9600.0, 5, true, 4));
-        list.add(new ProductDTO(2, "Taladro", "Herramientas", "Black & Decker", 12500.0, 7, true, 4));
         list.add(new ProductDTO(4, "Samsung Galaxy s21 Ultra", "Celulares", "Samsung", 150000.0, 7, true, 4));
+        list.add(new ProductDTO(2, "Taladro", "Herramientas", "Black & Decker", 12500.0, 7, true, 4));
         list.add(new ProductDTO(3, "Soldadora", "Herramientas", "Makita", 9600.0, 5, false, 4));
         return list;
     }
@@ -100,5 +100,13 @@ public class ProductDTOTest {
         return list;
     }
 
-
+    /**
+     * Return and ArrayList with te category Herramientas.
+     * @return
+     */
+    public static ArrayList<String> getTestCategories() {
+        ArrayList<String> categories = new ArrayList<>();
+        categories.add("Herramientas");
+        return categories;
+    }
 }

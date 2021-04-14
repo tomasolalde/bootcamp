@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@DisplayName("Unit Tests | Product Service")
 @WebMvcTest(ProductService.class)
 public class ProductServiceImplTest {
 
@@ -36,7 +37,7 @@ public class ProductServiceImplTest {
         products = ProductDTOTest.getTestProducts();
     }
 
-    @DisplayName("getAllProductsWithoutFilters_shouldReturnOK")
+    @DisplayName("Return products without filters")
     @Test
     public void getAllProductsWithoutFilters_shouldReturnOK() throws ApiException {
         when(repository.getProducts()).thenReturn(products);
@@ -45,7 +46,7 @@ public class ProductServiceImplTest {
         assertEquals(products, result);
     }
 
-    @DisplayName("getProductById_shouldReturnOK")
+    @DisplayName("Return product by id")
     @Test
     public void getProductById_shouldReturnOK() throws ApiException, IOException {
         when(repository.getProductById(any())).thenReturn(ProductDTOTest.getProductIdOne());
@@ -56,7 +57,7 @@ public class ProductServiceImplTest {
         assertEquals(expectedProduct, result);
     }
 
-    @DisplayName("getAllProductsWithFiltersCategory_shouldReturnOK")
+    @DisplayName("Return products filtered by category Herramientas")
     @Test
     public void getAllProductsWithFiltersCategory_shouldReturnOK() throws ApiException, IOException {
 
@@ -76,7 +77,7 @@ public class ProductServiceImplTest {
         assertEquals(expectedProducts, result, "The expected products are not equals.");
     }
 
-    @DisplayName("getAllProductsWithFiltersCategoryAndFreeShipping_shouldReturnOK")
+    @DisplayName("Return products filtered by category Herramientas and FreeShipping")
     @Test
     public void getAllProductsWithFiltersCategoryAndFreeShipping_shouldReturnOK() throws ApiException, IOException {
 
@@ -98,7 +99,7 @@ public class ProductServiceImplTest {
         assertEquals(expectedProducts, result, "The expected products are not equals.");
     }
 
-    @DisplayName("getAllProductsAlphabeticallyOrderedAsc_shouldReturnOK")
+    @DisplayName("Return products filtered by Ascending order")
     @Test
     public void getAllProductsAlphabeticallyOrderedAsc_shouldReturnOK() throws ApiException, IOException {
 
@@ -115,7 +116,7 @@ public class ProductServiceImplTest {
         assertEquals(expectedProducts, result, "The expected products are not equals.");
     }
 
-    @DisplayName("getAllProductsAlphabeticallyOrderedDes_shouldReturnOK")
+    @DisplayName("Return products filtered by Descending order")
     @Test
     public void getAllProductsAlphabeticallyOrderedDes_shouldReturnOK() throws ApiException, IOException {
 
@@ -132,7 +133,7 @@ public class ProductServiceImplTest {
         assertEquals(expectedProducts, result, "The expected products are not equals.");
     }
 
-    @DisplayName("getAllProductsOrderedByPriceLowerToHigher_shouldReturnOK")
+    @DisplayName("Return products filtered by price lower to higher")
     @Test
     public void getAllProductsOrderedByPriceLowerToHigher_shouldReturnOK() throws ApiException, IOException {
 
@@ -149,10 +150,9 @@ public class ProductServiceImplTest {
         assertEquals(expectedProducts, result, "The expected products are not equals.");
     }
 
-    @DisplayName("getAllProductsOrderedByPriceHigherToLower_shouldReturnOK")
+    @DisplayName("Return products filtered by price higher to lower")
     @Test
     public void getAllProductsOrderedByPriceHigherToLower_shouldReturnOK() throws ApiException, IOException {
-
         // Mockup service - Desordered products
         when(repository.getProducts()).thenReturn(ProductDTOTest.getProductsPriceDesordered());
 
@@ -165,7 +165,5 @@ public class ProductServiceImplTest {
         assertNotNull(result, "The list of products is null.");
         assertEquals(expectedProducts, result, "The expected products are not equals.");
     }
-
-
 
 }

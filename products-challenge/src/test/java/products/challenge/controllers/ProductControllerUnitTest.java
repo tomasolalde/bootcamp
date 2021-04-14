@@ -1,15 +1,12 @@
 package products.challenge.controllers;
 
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,14 +15,12 @@ import products.challenge.dtos.ProductDTO;
 import products.challenge.dtos.ProductDTOTest;
 import products.challenge.dtos.filters.ProductFiltersDTO;
 import products.challenge.dtos.responses.ResponseGetByFilters;
-import products.challenge.repositories.ProductRepositoryImpl;
+import products.challenge.repositories.ProductRepository;
 import products.challenge.services.ProductService;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -33,7 +28,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @WebMvcTest(ProductController.class)
-public class ProductControllerTest {
+public class ProductControllerUnitTest {
+
+    @InjectMocks
+    private ProductController productController;
 
     @Autowired
     private MockMvc mockMvc;
@@ -41,26 +39,29 @@ public class ProductControllerTest {
     @MockBean
     private ProductService productService;
 
-    private ArrayList<ProductDTO> mockProducts;
+    @MockBean
+    private ProductRepository productRepository;
 
     private ObjectMapper objectMapper;
 
     @BeforeEach
     public void setUp() throws IOException {
         objectMapper = new ObjectMapper();
-        mockProducts = ProductDTOTest.getTestProducts();
     }
 
     @DisplayName("getAllProductsWithoutFilters_shouldReturnOK")
     @Test
     void getAllProductsWithoutFilters_shouldReturnOK() throws Exception {
+        ArrayList<ProductDTO> mockedProducts = ProductDTOTest.getTestProducts();
         // Mock of repository and service methods
-        when(productService.getAllByFilters(any())).thenReturn(mockProducts);
+//        when(productRepository.getProducts()).thenReturn(mockedProducts);
+        when(productService.getAllByFilters(new ProductFiltersDTO())).thenReturn(mockedProducts);
+
         MvcResult result = this.mockMvc.perform(get("/articles"))
                 .andExpect(status().isOk())
                 .andReturn();
         ResponseGetByFilters response = objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>() {});
-        assertEquals(response.getItems(), mockProducts);
+        assertEquals(response.getItems(), mockedProducts);
     }
 
     @DisplayName("getProductById_shouldReturnOK")
@@ -76,5 +77,24 @@ public class ProductControllerTest {
         ProductDTO product = objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<ProductDTO>() {});
         assertEquals(product, expectedProduct);
     }
+
+//    @DisplayName("get products filtered by category Herramientas")
+//    @Test
+//    void getProductsWithFilter_shouldReturnOK() throws Exception {
+//        ArrayList<ProductDTO> mockedProducts = ProductDTOTest.getTestProducts();
+//        when(productRepository.getProducts()).thenReturn(mockedProducts);
+//        // Mockup of categories for the validation in the service
+//        ArrayList<String> categories = new ArrayList<>();
+//        categories.add("Herramientas");
+//
+//        MvcResult result = this.mockMvc.perform(get("/articles?category=Herramientas"))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//
+//        ResponseGetByFilters response = objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>() {});
+//
+//        assertNotNull(response);
+//    }
+
 
 }
