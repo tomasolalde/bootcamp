@@ -6,10 +6,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import products.challenge.dtos.ProductDTO;
 import products.challenge.dtos.TicketDTO;
 import products.challenge.dtos.TicketDTOTest;
+import products.challenge.exceptions.ApiException;
 import products.challenge.repositories.ProductRepository;
+import products.challenge.repositories.ProductRepositoryImpl;
 import products.challenge.repositories.TicketRepository;
 import products.challenge.repositories.TicketRepositoryImpl;
 
@@ -27,7 +30,7 @@ import java.io.IOException;
 public class TicketServiceImplTest {
 
     @InjectMocks
-    private TicketServiceImpl service;
+    private TicketServiceImpl ticketService;
 
     @MockBean
     private TicketRepository ticketRepository;
@@ -37,26 +40,22 @@ public class TicketServiceImplTest {
 
     @BeforeEach
     public void setUp() throws IOException {
-        service = new TicketServiceImpl(ticketRepository, productRepository);
-
+        /*
+         * Mockup the product repository. We Create a new instance of the product repository with
+         * mockup products, the reason of that is we want to use specifics products for the test.
+         */
+        productRepository = new ProductRepositoryImpl(TicketDTOTest.getTestProducts());
+        ticketRepository = new TicketRepositoryImpl();
+        ticketService = new TicketServiceImpl(ticketRepository, productRepository);
     }
 
     @Test
     public void purchaseRequestWithValidProducts_shouldReturnOK() {
-        // Mockup of getProucts. This method is used in the logic of the creation ticket service
-        when(productRepository.getProducts()).thenReturn(TicketDTOTest.getTestProducts());
-        // Mock of getProductById used in the ticketService
-        when(productRepository.getProductById(1)).thenReturn(new ProductDTO(1, "Desmalezadora", "Herramientas", "Makita", 9600.0, 5, true, 4));
-        when(productRepository.getProductById(2)).thenReturn(new ProductDTO(2, "Taladro", "Herramientas", "Black & Decker", 12500.0, 7, true, 4));
-        when(productRepository.getProductById(4)).thenReturn(new ProductDTO(4, "Samsung Galaxy s21 Ultra", "Celulares", "Samsung", 150000.0, 7, true, 4));
-        when(productRepository.getProductById(5)).thenReturn(new ProductDTO(5, "Samsung Galaxy s21 +", "Celulares", "Samsung", 130000.0, 7, true, 4));
-
-
         // Create the pucharse request with valid parameters
-        TicketDTO ticketResult = service.createPurchase(TicketDTOTest.purchaseRequestWithValidProducts());
-
-
+        TicketDTO ticketResult = ticketService.createPurchase(TicketDTOTest.purchaseRequestWithValidProducts());
+        assertNotNull(ticketResult, "The Ticket can't be null.");
+        TicketDTO expectedTicket = TicketDTOTest.ticketWithValidProducts();
+        assertEquals(expectedTicket, ticketResult);
     }
-
-
+    
 }

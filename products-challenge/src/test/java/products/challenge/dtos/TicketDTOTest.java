@@ -23,21 +23,34 @@ public class TicketDTOTest {
         RequestPurchaseDTO requestPurchaseDTO = new RequestPurchaseDTO();
         ArrayList<PurchaseArticleDTO> articles = new ArrayList<>();
         articles.add(new PurchaseArticleDTO(1, "Desmalezadora", "Makita", 1));
-        articles.add(new PurchaseArticleDTO(2, "Taladro", "Makita", 1));
+        articles.add(new PurchaseArticleDTO(2, "Taladro", "Black & Decker", 1));
         articles.add(new PurchaseArticleDTO(4, "Samsung Galaxy s21 Ultra", "Samsung", 1));
         articles.add(new PurchaseArticleDTO(5, "Samsung Galaxy s21 +", "Samsung", 1));
         requestPurchaseDTO.articles = articles;
         return requestPurchaseDTO;
     }
 
+    public static RequestPurchaseDTO purchaseRequestWithInvalidProducts() {
+        RequestPurchaseDTO requestPurchaseDTO = new RequestPurchaseDTO();
+        ArrayList<PurchaseArticleDTO> articles = new ArrayList<>();
+        articles.add(new PurchaseArticleDTO(1, "Desmalezadora", "Makita", 1));
+        articles.add(new PurchaseArticleDTO(2, "Taladro", "Black & Decker", 1));
+        articles.add(new PurchaseArticleDTO(4, "Samsung Galaxy s21 Ultra", "Samsung", 1));
+        articles.add(new PurchaseArticleDTO(100, "Samsung Galaxy s22", "Samsung", 1));
+        requestPurchaseDTO.articles = articles;
+        return requestPurchaseDTO;
+    }
+
+
     public static TicketDTO ticketWithValidProducts() {
         TicketDTO ticket = new TicketDTO();
         ArrayList<PurchaseArticleDTO> articles = new ArrayList<>();
         articles.add(new PurchaseArticleDTO(1, "Desmalezadora", "Makita", 1));
-        articles.add(new PurchaseArticleDTO(2, "Taladro", "Makita", 1));
+        articles.add(new PurchaseArticleDTO(2, "Taladro", "Black & Decker", 1));
         articles.add(new PurchaseArticleDTO(4, "Samsung Galaxy s21 Ultra", "Samsung", 1));
         articles.add(new PurchaseArticleDTO(5, "Samsung Galaxy s21 +", "Samsung", 1));
         ticket.articles = articles;
+        ticket.setId(1);
         ticket.setTotal(302100.0);
         return ticket;
     }

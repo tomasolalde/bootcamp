@@ -17,12 +17,6 @@ public class TicketRepositoryImpl implements TicketRepository {
     private final ArrayList<TicketDTO> tickets = new ArrayList<>();
     private final HashMap<Integer, PurchaseArticleDTO> articles =  new HashMap<>();
 
-    /**
-     *
-     * @param ticketArticles
-     * @param ticketArticlesTotal
-     * @return
-     */
     @Override
     public TicketDTO createTicket(ArrayList<PurchaseArticleDTO> ticketArticles, Double ticketArticlesTotal) {
         TicketDTO ticket = new TicketDTO();

@@ -15,10 +15,14 @@ import java.util.stream.Collectors;
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
 
-    private ArrayList<ProductDTO> products = new ArrayList<>();
+    public ArrayList<ProductDTO> products = new ArrayList<>();
 
     public ProductRepositoryImpl() {
         loadDataBase();
+    }
+
+    public ProductRepositoryImpl(ArrayList<ProductDTO> productDTOArrayList) {
+        products = productDTOArrayList;
     }
 
     @Override
